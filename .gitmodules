@@ -1,0 +1,3 @@
+[submodule "cs639_demos"]
+	path = cs639_demos
+	url = https://github.com/sifakis/CS639S23_Demos
