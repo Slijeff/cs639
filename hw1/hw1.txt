@@ -1,0 +1,33 @@
+Computer Specs: 
+    -CPU: AMD Ryzen5 3500X (6 Core)
+    -Memory: 16GB @3000 MHz
+Compiler: g++
+Operating System: Windows 10
+Compilation Method: Via command line
+Compilation Commands: g++ -o3 -fopenmp *.cpp -o main
+
+The total number of memory that is allocated into the two arrays is around 1GB.
+One array has 512 * 512 * 512 floats, which is 134,217,728 floats. Each float 
+takes 4 bytes, which in total is 536,870,912 bytes, and we multiply it by 2 since
+there are 2 arrays, we get 1,073,741,824 bytes which is 1GB.
+
+I ran the algorithm and found that with 6 threads, the runtime has reached its
+minimum. Increasing the number of threads does not decrease the runtime after
+6 threads. The runtime with 6 threads is around 200ms per iteration on my PC.
+The effective bandwidth is 1GB/0.2s = 5GB/s. Compare to the STREAM benchmark
+which shows around 20GB/s bandwith, the algorithm achieved about 25% peek memory 
+bandwidth.
+
+I tried switching the order of the loop: iterating first in the Z direction, then
+Y, then X. The runtime significantly increased, around 2600ms in 6 threads. Next,
+I kept the first loop the same and swap the last two loop. Compare with the unmodified
+version, the runtime increased about 100ms, around 300ms. It make sense that
+inverting the baseline implementation had significant impact on the performance
+because the memory access appeared to be "bouncing around", which the CPU is unable
+to cache these memory. Whereas in the baseline implementation, the memory access
+is sequential, and the CPU is able to cache a chunck of memory for later access.
+In the second experiment, to access the next float, the CPU needs to access
+512 * 4 = 2MB after the current position. My CPU has a L2 cache of 3MB, which is 
+able to fit two consecutive accesses theoretically. Therefore it had an impact
+on the performance but not as big as the first experiment.
+
