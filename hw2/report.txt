@@ -1,0 +1,73 @@
+Computer Specs: 
+    -CPU: AMD Ryzen5 3500X (6 Core)
+    -Memory: 16GB @3000 MHz
+Compiler: g++
+Operating System: Windows 10
+Compilation Method: Via command line
+Compilation Commands: g++ -ofast -fopenmp *.cpp -o main
+
+TASK #1:
+Time of each kernel execution in the original Conjugate Gradients algorithm.
+All the timings are separate for the same kernel at different lines, except for the Laplacian.
+With 6 threads:
+    [Total Laplacian Time : 10815.1ms]
+    [Total Saxpy Time on Line 2: 60.9922ms]
+    [Total Saxpy Time on Line 8: 13382.8ms]
+    [Total Saxpy Time on Line 9: 50.5678ms]
+    [Total Saxpy Time on Line 16 (first): 13037.1ms]
+    [Total Saxpy Time on Line 16 (second): 13169.9ms]
+    [Total Copy Time on Line 4: 16.4096ms]
+    [Total Copy Time on Line 13: 3665.41ms]
+    [Total innerProduct Time on Line 4: 12.0425ms]
+    [Total innerProduct Time on Line 6: 4454.86ms]
+    [Total innerProduct Time on Line 13: 4086.75ms]
+    [Total Norm Time on Line 2: 21.7242ms]
+    [Total Norm Time on Line 8: 5407.59ms]
+    [Total Conjugate Gradients time: 68446.3ms]
+With 1 thread:
+    [Total Laplacian Time : 32925.7ms]
+    [Total Saxpy Time on Line 2: 53.9208ms]
+    [Total Saxpy Time on Line 8: 12653.3ms]
+    [Total Saxpy Time on Line 9: 50.3767ms]
+    [Total Saxpy Time on Line 16 (first): 12636.4ms]
+    [Total Saxpy Time on Line 16 (second): 12726ms]
+    [Total Copy Time on Line 4: 55.5598ms]
+    [Total Copy Time on Line 13: 12574.7ms]
+    [Total innerProduct Time on Line 4: 47.9557ms]
+    [Total innerProduct Time on Line 6: 12552.8ms]
+    [Total innerProduct Time on Line 13: 12486.2ms]
+    [Total Norm Time on Line 2: 62.9517ms]
+    [Total Norm Time on Line 8: 16206.7ms]
+    [Total Conjugate Gradients time: 125149ms]
+
+
+TASK #2:
+With 6 threads:
+    [Total Laplacian Time : 28.5744ms]
+    [Total Saxpy Time on Line 2: 58.4462ms]
+    [Total Saxpy Time on Line 8: 12878.3ms]
+    [Total Saxpy Time on Line 9: 49.8912ms]
+    [Total Combined Saxpy Time on Line 16: 23379.3ms]   <--Replaced
+    [Total Copy Time on Line 4: 18.9941ms]
+    [Total Copy Time on Line 13: 2423.02ms]
+    [Total innerProduct Time on Line 4: 16.3673ms]
+    [Total Combined Line6 Time: 9298.54ms]              <--Replaced
+    [Total innerProduct Time on Line 13: 2519.66ms]
+    [Total Norm Time on Line 2: 14.3673ms]
+    [Total Norm Time on Line 8: 3123.53ms]
+    [Total Conjugate Gradients time: 53916.3ms]
+
+With 1 thread:
+    [Total Laplacian Time : 146.114ms]
+    [Total Saxpy Time on Line 2: 59.101ms]
+    [Total Saxpy Time on Line 8: 12726.3ms]
+    [Total Saxpy Time on Line 9: 49.2336ms]
+    [Total Combined Saxpy Time on Line 16: 23261ms]   <--Replaced
+    [Total Copy Time on Line 4: 58.7427ms]
+    [Total Copy Time on Line 13: 12511.7ms]
+    [Total innerProduct Time on Line 4: 47.5397ms]
+    [Total Combined Line6 Time: 44138ms]              <--Replaced
+    [Total innerProduct Time on Line 13: 12507.8ms]
+    [Total Norm Time on Line 2: 64.165ms]
+    [Total Norm Time on Line 8: 16123.1ms]
+    [Total Conjugate Gradients time: 121802ms]
