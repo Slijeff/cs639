@@ -1,0 +1,5 @@
+source /s/intelcompilers-2019/bin/iccvars.sh intel64
+
+
+
+

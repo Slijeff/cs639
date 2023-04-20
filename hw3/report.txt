@@ -1,0 +1,55 @@
+Computer Specs: 
+    -CPU: 11th Gen Intel(R) Core(TM) i5-11500 (12 cores)
+    -Memory: 16GB
+Compiler: icc
+Operating System: Linux
+Compilation Method: Via command line
+Compilation Commands: compile: icc *.cpp -qopenmp -mkl -o hw3
+
+
+For this assignment, I changed the implementation of Norm(), InnerProduct(), and Copy() to use the mkl library.
+I timed the executions of the entire ConjugateGradients algorithm and compare the result with LaplaceSolver_1_5 (with DO_NOT_USE_MKL flag).
+
+I ran both versions 5 times and calculated their averages. We can see that the
+modified version is slightly faster than the unmodified version by ~700ms. Below
+are the results: 
+
+Unmodified:
+
+Conjugate Gradients terminated after 256 iterations; residual norm (nu) = 0.00097589
+[Total ConjugateGradients Time: 34083.9ms]
+
+Conjugate Gradients terminated after 256 iterations; residual norm (nu) = 0.00097589
+[Total ConjugateGradients Time: 33279.6ms]
+
+Conjugate Gradients terminated after 256 iterations; residual norm (nu) = 0.00097589
+[Total ConjugateGradients Time: 33056.7ms]
+
+Conjugate Gradients terminated after 256 iterations; residual norm (nu) = 0.00097589
+[Total ConjugateGradients Time: 36189ms]
+
+Conjugate Gradients terminated after 256 iterations; residual norm (nu) = 0.00097589
+[Total ConjugateGradients Time: 33260.2ms]
+
+Avg: 33973.88ms
+
+
+
+Modified:
+
+Conjugate Gradients terminated after 256 iterations; residual norm (nu) = 0.000974735
+[Total ConjugateGradients Time: 33781.6ms]
+
+Conjugate Gradients terminated after 256 iterations; residual norm (nu) = 0.000974735
+[Total ConjugateGradients Time: 34659.1ms]
+
+Conjugate Gradients terminated after 256 iterations; residual norm (nu) = 0.000974735
+[Total ConjugateGradients Time: 32746.1ms]
+
+Conjugate Gradients terminated after 256 iterations; residual norm (nu) = 0.000974735
+[Total ConjugateGradients Time: 32415.8ms]
+
+Conjugate Gradients terminated after 256 iterations; residual norm (nu) = 0.000974735
+[Total ConjugateGradients Time: 32444.6ms]
+
+Avg: 33209.44ms 

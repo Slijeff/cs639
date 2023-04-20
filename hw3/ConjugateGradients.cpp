@@ -10,7 +10,7 @@
 extern Timer timerLaplacian;
 extern Timer timerSaxpy;
 
-void ConjugateGradients(
+float ConjugateGradients(
     CSRMatrix& matrix,
     float (&x)[XDIM][YDIM][ZDIM],
     const float (&f)[XDIM][YDIM][ZDIM],
@@ -25,7 +25,7 @@ void ConjugateGradients(
     float nu = Norm(r);
 
     // Algorithm : Line 3
-    if (nu < nuMax) return;
+    if (nu < nuMax) return nu;
         
     // Algorithm : Line 4
     Copy(r, p);
@@ -52,7 +52,7 @@ void ConjugateGradients(
             Saxpy(p, x, x, alpha);
             std::cout << "Conjugate Gradients terminated after " << k << " iterations; residual norm (nu) = " << nu << std::endl;
             if (writeIterations) WriteAsImage("x", x, k, 0, 127);
-            return;
+            return nu;
         }
             
         // Algorithm : Line 13

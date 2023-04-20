@@ -3,7 +3,7 @@
 #include "Parameters.h"
 #include "CSRMatrix.h"
 
-void ConjugateGradients(
+float ConjugateGradients(
     CSRMatrix& matrix,
     float (&x)[XDIM][YDIM][ZDIM],
     const float (&f)[XDIM][YDIM][ZDIM],

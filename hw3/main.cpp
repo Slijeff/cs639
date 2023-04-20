@@ -35,10 +35,14 @@ int main(int argc, char *argv[])
 
     // Call Conjugate Gradients algorithm
     {	
-        timerLaplacian.Reset(); timerSaxpy.Reset();
+        Timer timerTotal;
+        timerTotal.Start();
+        //timerLaplacian.Reset(); 
+        // timerSaxpy.Reset();
         ConjugateGradients(matrix, x, f, p, r, z, false);
-        timerLaplacian.Print("Total Laplacian Time : ");
-        timerSaxpy.Print("Total Saxpy Time : ");
+        timerTotal.Stop("Total ConjugateGradients Time: ");
+        //timerLaplacian.Print("Total Laplacian Time : ");
+        // timerSaxpy.Print("Total Saxpy Time : ");
     }
 
     return 0;
