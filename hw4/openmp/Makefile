@@ -1,4 +1,4 @@
 build:
-	icc *.cpp -qopenmp -mkl -o hw4
+	icc *.cpp -qopenmp -mkl -o hw4_openmp
 clean:
-	rm ./hw4
+	rm ./hw4_openmp

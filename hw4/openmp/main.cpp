@@ -5,6 +5,8 @@
 #include <iostream>
 #include <iomanip>
 
+#include <omp.h>
+
 int main(int argc, char *argv[])
 {
     float *Araw = static_cast<float*>( AlignedAllocate( MATRIX_SIZE * MATRIX_SIZE * sizeof(float), 64 ) );
@@ -35,14 +37,21 @@ int main(int argc, char *argv[])
 
     float discrepancy = MatrixMaxDifference(C, referenceC);
     std::cout << "Discrepancy between two methods : " << discrepancy << std::endl;
+
+    int num_test = 20;
+    double avg_time = 0;
     
-    for(int test = 1; test <= 20; test++)
+    for(int test = 1; test <= num_test; test++)
     {
         std::cout << "Running kernel for performance run #" << std::setw(2) << test << " ... ";
         timer.Start();
         MatMatMultiply(A, B, C);
-        timer.Stop("Elapsed time : ");
+        avg_time += timer.Stop("Elapsed time : ");
     }
+
+    std::cout << "\nMatrix Size: " << MATRIX_SIZE << std::endl;
+    std::cout << "Block Size: " << BLOCK_SIZE << std::endl;
+    std::cout << "Average Time: " << avg_time / num_test << "ms" << std::endl;
     
     return 0;
 }

@@ -17,11 +17,12 @@ struct Timer
         mStartTime = clock_t::now();
     }
 
-    void Stop(const std::string& msg)
+    double Stop(const std::string& msg)
     {
         mStopTime = clock_t::now();
         std::chrono::duration<double, std::milli> elapsedTime = mStopTime - mStartTime;
         std::cout << "[" << msg << elapsedTime.count() << "ms]" << std::endl;
+        return elapsedTime.count();
     }
     
 };
