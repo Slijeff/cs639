@@ -6,6 +6,11 @@ Operating System: Linux
 Compilation Method: Via Makefile
 Compilation Commands: compile: icc *.cpp -qopenmp -mkl -o hw4
 
+*There's nothing nontrivial about the Makefile, it only contains the compilation command shown above so that 
+I don't need to type it each time* 
+
+The time recorded are in milliseconds. For each parameters, I ran 20 test iterations and took their average.
+
 +============+============+=========+====================+=================+
 | Matrix Res | Block Size | Threads | Avg. Time (openmp) | Avg. Time (mkl) |
 +============+============+=========+====================+=================+
@@ -27,5 +32,34 @@ Compilation Commands: compile: icc *.cpp -qopenmp -mkl -o hw4
 +------------+------------+---------+--------------------+-----------------+
 |    4096    |    128     |   12    |      1613.22       |        -        |
 +------------+------------+---------+--------------------+-----------------+
++------------+------------+---------+--------------------+-----------------+
+|    1024    |     32     |    1    |      69.3773       |     16.9465     |
++------------+------------+---------+--------------------+-----------------+
+|    1024    |     64     |    1    |      85.9961       |        -        |
++------------+------------+---------+--------------------+-----------------+
+|    1024    |    128     |    1    |      100.150       |        -        |
++------------+------------+---------+--------------------+-----------------+
+|    2048    |     32     |    1    |      660.871       |     127.243     |
++------------+------------+---------+--------------------+-----------------+
+|    2048    |     64     |    1    |      753.385       |        -        |
++------------+------------+---------+--------------------+-----------------+
+|    2048    |    128     |    1    |      832.883       |        -        |
++------------+------------+---------+--------------------+-----------------+
+|    4096    |     32     |    1    |      6113.67       |     992.049     |
++------------+------------+---------+--------------------+-----------------+
+|    4096    |     64     |    1    |      6728.85       |        -        |
++------------+------------+---------+--------------------+-----------------+
+|    4096    |    128     |    1    |      6945.22       |        -        |
++------------+------------+---------+--------------------+-----------------+
+
+Observations:
+
+According to the measurements, the performance decrease while increasing the block size, keeping the matrix size fixed.
+This decrease is more evident as the matrix size increases. This might be due to the fact that a block does not fit into
+the cache on this particular CPU. And as the block size increases, the more cache misses it would suffer.
+
+Another observation is that the mkl implementation generally increases the performance by 4x when changing from 1 thread 
+to 12 threads. This might possibly be caused by the limitation in this machine's memory bandwidth (i.e. it has became memory-bound
+instead of compute-bound). Or the number of threads might be greater than the number of blocks.
 
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #ifndef MATRIX_SIZE
-#define MATRIX_SIZE 4096
+#define MATRIX_SIZE 1024
 #endif
 
 #ifndef BLOCK_SIZE
